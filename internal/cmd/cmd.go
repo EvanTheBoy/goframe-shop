@@ -23,6 +23,8 @@ var (
 				group.Bind(
 					hello.New(),
 					controller.Rotation, // 轮播图
+					controller.Position, // 手工位图
+					controller.Admin,    // 管理员
 				)
 			})
 			s.Run()
