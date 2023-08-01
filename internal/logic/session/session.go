@@ -27,7 +27,7 @@ func (s *sSession) SetUser(ctx context.Context, user *entity.AdminInfo) error {
 	return service.BizCtx().Get(ctx).Session.Set(sessionKeyUser, user)
 }
 
-// GetUser 获取当前登录的用户信息对象，如果用户未登录返回nil。
+// GetUser 获取当前登录的用户信息对象，如果用户未登录返回nil
 func (s *sSession) GetUser(ctx context.Context) *entity.AdminInfo {
 	customCtx := service.BizCtx().Get(ctx)
 	if customCtx != nil {
