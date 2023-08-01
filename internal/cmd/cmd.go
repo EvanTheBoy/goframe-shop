@@ -25,6 +25,7 @@ var (
 					controller.Rotation, // 轮播图
 					controller.Position, // 手工位图
 					controller.Admin,    // 管理员
+					controller.Login,    // 管理员登录
 				)
 			})
 			s.Run()
