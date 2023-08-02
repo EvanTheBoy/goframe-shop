@@ -1,6 +1,10 @@
 package backend
 
-import "github.com/gogf/gf/v2/frame/g"
+import (
+	"github.com/gogf/gf/v2/frame/g"
+	"goframe-shop/internal/model/entity"
+	"time"
+)
 
 type LoginDoReq struct {
 	g.Meta   `path:"/backend/login" method:"post" summary:"执行登录请求" tags:"登录"`
@@ -10,5 +14,32 @@ type LoginDoReq struct {
 
 // LoginDoRes 返回
 type LoginDoRes struct {
-	Info interface{} `json:"info"`
+	Token  string    `json:"token"`
+	Expire time.Time `json:"expire"`
+}
+
+// LoginRes for gtoken
+type LoginRes struct {
+	Type        string                  `json:"type"`
+	Token       string                  `json:"token"`
+	ExpireIn    int                     `json:"expire_in"`
+	IsAdmin     int                     `json:"is_admin"`    //是否超管
+	RoleIds     string                  `json:"role_ids"`    //角色
+	Permissions []entity.PermissionInfo `json:"permissions"` //权限列表
+}
+
+type RefreshTokenReq struct {
+	g.Meta `path:"/refresh_token" method:"post"`
+}
+
+type RefreshTokenRes struct {
+	Token  string    `json:"token"`
+	Expire time.Time `json:"expire"`
+}
+
+type LogoutReq struct {
+	g.Meta `path:"/logout" method:"post"`
+}
+
+type LogoutRes struct {
 }
