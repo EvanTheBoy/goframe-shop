@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"github.com/gogf/gf/v2/util/gconv"
 	"goframe-shop/api/backend"
 	"goframe-shop/internal/model"
 	"goframe-shop/internal/service"
@@ -59,5 +60,14 @@ func (a *cAdmin) List(ctx context.Context, req *backend.AdminGetListCommonReq) (
 		Page:  getListRes.Page,
 		Size:  getListRes.Size,
 		Total: getListRes.Total,
+	}, nil
+}
+
+// Info for jwt
+func (a *cAdmin) Info(ctx context.Context, req *backend.AdminGetInfoReq) (res *backend.AdminGetInfoRes, err error) {
+	return &backend.AdminGetInfoRes{
+		Id:          gconv.Int(service.Auth().GetIdentity(ctx)),
+		IdentityKey: service.Auth().IdentityKey,
+		Payload:     service.Auth().GetPayload(ctx),
 	}, nil
 }

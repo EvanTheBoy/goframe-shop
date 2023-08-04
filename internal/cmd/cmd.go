@@ -22,6 +22,7 @@ var (
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				// group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Middleware(
+					service.Middleware().CORS,
 					service.Middleware().Ctx,
 					service.Middleware().ResponseHandler,
 				)
