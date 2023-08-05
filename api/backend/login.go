@@ -29,7 +29,7 @@ type LoginRes struct {
 }
 
 type RefreshTokenReq struct {
-	g.Meta `path:"/refresh_token" method:"post"`
+	g.Meta `path:"/backend/refresh_token" method:"post"`
 }
 
 type RefreshTokenRes struct {
@@ -37,8 +37,10 @@ type RefreshTokenRes struct {
 	Expire time.Time `json:"expire"`
 }
 
+// TODO 为什么这里没有请求参数token?
+
 type LogoutReq struct {
-	g.Meta `path:"/logout" method:"post"`
+	g.Meta `path:"/backend/logout" method:"post"`
 }
 
 type LogoutRes struct {
