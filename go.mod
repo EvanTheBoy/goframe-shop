@@ -3,6 +3,7 @@ module goframe-shop
 go 1.20
 
 require (
+	github.com/goflyfox/gtoken v1.5.9
 	github.com/gogf/gf-jwt/v2 v2.1.0
 	github.com/gogf/gf/contrib/drivers/mysql/v2 v2.5.0
 	github.com/gogf/gf/v2 v2.5.0

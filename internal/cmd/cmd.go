@@ -19,6 +19,11 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
+			// 启动管理后台gtoken
+			gfAdminToken, err := StartBackendGToken()
+			if err != nil {
+				return err
+			}
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(
 					service.Middleware().CORS,
@@ -37,7 +42,9 @@ var (
 				)
 				//需要登录的路由组绑定
 				group.Group("/", func(group *ghttp.RouterGroup) {
-					group.Middleware(service.Middleware().Auth)
+					if err := gfAdminToken.Middleware(ctx, group); err != nil {
+						panic(err)
+					}
 					group.ALLMap(g.Map{
 						"/backend/admin/info": controller.Admin.Info,
 					})
