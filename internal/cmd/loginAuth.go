@@ -21,10 +21,10 @@ func StartBackendGToken() (gfAdminToken *gtoken.GfToken, err error) {
 	gfAdminToken = &gtoken.GfToken{
 		CacheMode:        consts.CacheModeRedis,
 		ServerName:       consts.BackendServerName,
-		LoginPath:        "/login",
+		LoginPath:        "/backend/login",
 		LoginBeforeFunc:  loginFunc,
 		LoginAfterFunc:   loginAfterFunc,
-		LogoutPath:       "/user/logout",
+		LogoutPath:       "/backend/user/logout",
 		AuthPaths:        g.SliceStr{"/backend/admin/info"},
 		AuthExcludePaths: g.SliceStr{"/admin/user/info", "/admin/system/user/info"}, // 不拦截路径 /user/info,/system/user/info,/system/user,
 		AuthAfterFunc:    authAfterFunc,

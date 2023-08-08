@@ -30,6 +30,7 @@ var (
 					service.Middleware().Ctx,
 					service.Middleware().ResponseHandler,
 				)
+				// 不需要登录的路由组绑定
 				group.Bind(
 					hello.New(),
 					controller.Rotation,     // 轮播图
@@ -40,7 +41,7 @@ var (
 					controller.Admin.List,   // 管理员
 					controller.Login,        // 管理员登录
 				)
-				//需要登录的路由组绑定
+				// 需要登录的路由组绑定
 				group.Group("/", func(group *ghttp.RouterGroup) {
 					if err := gfAdminToken.Middleware(ctx, group); err != nil {
 						panic(err)
