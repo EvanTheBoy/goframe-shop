@@ -3,6 +3,7 @@ package controller
 import (
 	"context"
 	"goframe-shop/api/backend"
+	"goframe-shop/api/frontend"
 	"goframe-shop/internal/model"
 	"goframe-shop/internal/service"
 )
@@ -58,4 +59,22 @@ func (a *cRotation) Update(ctx context.Context, req *backend.RotationUpdateReq) 
 		},
 	})
 	return &backend.RotationUpdateRes{Id: req.Id}, nil
+}
+
+// ListFrontend 前台的取值方法
+func (a *cRotation) ListFrontend(ctx context.Context, req *frontend.RotationGetListCommonReq) (res *frontend.RotationGetListCommonRes, err error) {
+	getListRes, err := service.Rotation().GetList(ctx, model.RotationGetListInput{
+		Page: req.Page,
+		Size: req.Size,
+		Sort: req.Sort,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &frontend.RotationGetListCommonRes{
+		List:  getListRes.List,
+		Page:  getListRes.Page,
+		Size:  getListRes.Size,
+		Total: getListRes.Total,
+	}, nil
 }
